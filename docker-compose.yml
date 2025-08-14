@@ -1,0 +1,35 @@
+
+services:
+  client:
+    build:
+      context: ./client          # Path ke folder client (Next.js)
+    ports:
+      - "3000:3000"              # Pemetaan port 3000
+    env_file:
+      - ./client/.env.local  
+    depends_on:
+      - server       
+    networks:
+      - grow_network             # Menggunakan jaringan yang sama dengan server dan model
+  
+  server:
+    build:
+      context: ./server          # Path ke folder server (Node.js)
+    ports:
+      - "8000:8000"              # Pemetaan port 8000
+    depends_on:
+      - model                    # Pastikan server dijalankan setelah model (Flask)
+    networks:
+      - grow_network             # Menggunakan jaringan yang sama dengan client dan model
+  
+  model:
+    build:
+      context: ./model           # Path ke folder model (Flask API)
+    ports:
+      - "5000:5000"              # Pemetaan port 5000
+    networks:
+      - grow_network             # Menggunakan jaringan yang sama dengan client dan server
+
+networks:
+  grow_network:                  # Mendefinisikan jaringan grow_network
+    driver: bridge
