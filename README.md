@@ -1,4 +1,4 @@
-# 🌱 Grow - Irrigation Recommendation System
+# 🌱 Irrigo - Irrigation Recommendation System
 
 A web application that helps Indonesian farmers by predicting **rice crop water requirements** for the next 5 days, based on soil moisture and weather forecasts.  
 The goal is simple: provide **accurate irrigation recommendations** so farmers know **how much water their land needs** to optimize crop growth.  
