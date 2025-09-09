@@ -11,11 +11,11 @@ The focus is to empower farmers with **data-driven irrigation planning**, reduci
 By combining **AI predictions** with real-time weather and soil data, this project demonstrates how technology can support sustainable agriculture in Indonesia.  
 
 ## 🚀 Features
-- Farmers can input their **land coordinates** 🗺️  
-- Fetches **soil moisture data** from EOSDA API  
-- Fetches **weather forecast** from OpenWeather API  
-- Predicts **irrigation water needs (liters/day)** for the next 5 days using a trained Random Forest model  
-- Full-stack integration with **Next.js frontend, Node.js backend, and Flask model API**
+- 📍 **Land coordinates input** → Farmers can enter the coordinates of their rice fields.  
+- 🌤️ **Weather forecast** → Powered by **OpenWeatherAPI**.  
+- 🌱 **Soil moisture data** → Retrieved from **EOSDA API**.  
+- 🤖 **Crop water requirement prediction** → Using a **Random Forest model**.  
+- 📊 **5-day prediction results** → Helps farmers manage irrigation planning.  
 
   
 ## 🧠 AI Model
@@ -25,18 +25,17 @@ By combining **AI predictions** with real-time weather and soil data, this proje
 - **Purpose**: Predict rice water needs based on weather conditions & soil moisture.  
 
 
-## ✨ Technologies
+## 🏗️ Tech Stack
+- **Frontend**: [Next.js](https://nextjs.org/)  
+- **Backend**: [Node.js](https://nodejs.org/)  
+- **AI Model API**: [Flask](https://flask.palletsprojects.com/)  
+- **External APIs**:  
+  - [OpenWeatherAPI](https://openweathermap.org/api) → weather forecast  
+  - [EOSDA API](https://eos.com/) → soil moisture data  
+- **Containerization**: [Docker](https://www.docker.com/) + Docker Compose  
 
-- `Next.js` → Frontend (Client)  
-- `Node.js` → Backend (Server)  
-- `Flask (Python)` → AI Model API  
-- `Docker & Docker Compose` → Containerization  
-- `Random Forest` → Machine Learning Model (Trained using Kaggle dataset)  
-- `OpenWeather API` → Weather forecast data  
-- `EOSDA API` → Soil moisture data  
 
-
-## 🚦 Running the Project
+## 🐳 Running Locally
 
 To run this project locally, make sure you have **Docker** installed. Then follow these steps:
 
