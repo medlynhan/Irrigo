@@ -1,7 +1,7 @@
 'use client'
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import Button2 from '../components/Button2';
+import DarkGreenButton from '../components/DarkGreenButton';
 import ScheduleBox from '../components/ScheduleBox';
 import Image from 'next/image';
 import { IoIosArrowDown } from "react-icons/io";
@@ -239,7 +239,7 @@ export default function Page() {
 
 
       
-      <div className='  w-full flex flex-col gap-10 lg:flex-row w-full lg:h-[75vh] '>
+      <div className='  w-full flex flex-col gap-10 lg:flex-row w-full lg:h-[75vh] border'>
 
         <div className='grid grid-cols gap-6 grid-rows-4  place-content-between'>
             <div className='flex flex-col gap-2  row-span-1'>
@@ -277,7 +277,7 @@ export default function Page() {
 
                 
                 {!loading && (
-                <div className='box bg-[var(--light-green-1)] gap-4 px-4 flex-col text-[var(--black)] h-full  row-span-3'>
+                <div className='box bg-[var(--light-green-1)] gap-4 px-4 flex-col text-[var(--black)] h-full  row-span-3 border-pink-200 border-4'>
                   <div className='flex flex-row justify-start w-full items-center gap-2'>
                       <FaBell className='text-base md:text-lg text-[var(--dark-green)]' />
                       <p className='text-base md:text-lg font-semibold text-[var(--dark-green)]'>Notifikasi</p>
@@ -289,7 +289,7 @@ export default function Page() {
                 )}
 
                 {!loading && (
-                <div className='box grid grid-cols-5 bg-transparent p-0 gap-4 text-[var(--dark-green)] h-full  row-span-4 w-full'>
+                <div className='box grid grid-cols-5 bg-transparent p-0 gap-4 text-[var(--dark-green)] h-full  row-span-4 w-full '>
                 
                   <div className='col-span-2 h-full w-full  overflow-hidden '>
                       <Image src={'/fieldPhoto.png'} width={200} height={200} className='object-cover object-fit w-full h-full rounded-xl'></Image>
@@ -319,7 +319,7 @@ export default function Page() {
         </div>     
 
           {!loading && (
-          <div className='  flex flex-col gap-2 w-full p-4 lg:p-10 rounded-xl bg-[var(--medium-green)]  h-full overflow-y-auto'>
+          <div className='  flex flex-col gap-2 w-full p-4 lg:p-10 rounded-xl bg-[var(--medium-green)]  h-full overflow-y-auto border-pink-200 border-4 scrollbar-hide'>
             
             <h1 className='pb-2 text-base ms:text-lg text-[var(--white)] font-semibold'>Hasil prediksi kebutuhan air</h1>
           
@@ -362,7 +362,7 @@ export default function Page() {
         </div>
         {!loading && (
         <div className='  '>
-              <Button2 text={"Kembali"} onClick={handleGoBack} />
+              <DarkGreenButton text={"Kembali"} onClick={handleGoBack} />
         </div>
         )}
 

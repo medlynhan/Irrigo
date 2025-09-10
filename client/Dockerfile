@@ -20,7 +20,7 @@ COPY . .
 RUN npm run build
 
 # Jalankan aplikasi frontend (misalnya di port 3000)
-CMD ["npm", "start"]
+CMD ["npm", "run", "dev"]
 
 # Expose port untuk frontend
 EXPOSE 3000

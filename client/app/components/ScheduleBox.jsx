@@ -1,5 +1,4 @@
 import React from 'react'
-import Button from './Button1'
 import Image from 'next/image'
 import { TbTemperature } from "react-icons/tb";
 import { IoSunny } from "react-icons/io5";

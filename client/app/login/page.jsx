@@ -3,9 +3,9 @@ import React from 'react'
 import { IoIosClose } from "react-icons/io";
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import Button2 from '../components/Button2';
 import { supabase } from '../lib/supabase';
 import Cookies from 'js-cookie';
+import DarkGreenButton from '../components/DarkGreenButton';
 
 export default function page() {
     const router = useRouter();
@@ -79,9 +79,9 @@ export default function page() {
     
   return (
     <div className='container md:p-25 md:py-15 '>
-        <div className="fixed flex flex-col gap-6 top-0 left-0 w-full h-full bg-[var(--light-yellow)] flex justify-center items-center text-[var(--dark-green)]">
+        <div className="fixed flex flex-col gap-6 top-0 left-0 w-full h-full bg-[var(--light-yellow)] flex justify-center items-center text-[var(--black)]">
             <div className='flex flex-col gap-4'>
-                <h1 className='text-xl md:text-3xl font-semibold text-center w-full'>Masuk ke Akun</h1>
+                <h1 className='text-xl md:text-3xl font-semibold text-center w-full '>Masuk ke Akun</h1>
                 <IoIosClose className='text-4xl md:text-5xl cursor-pointer absolute top-5 right-5'  onClick={goToHomePage}/>
                 <p className='text-sm md:text-base text-center'>
                     Belum punya akun ? <span className='underline font-semibold'><a href="/signUp">Daftar</a></span>
@@ -110,7 +110,7 @@ export default function page() {
                 </div>
             </div>
             <p className='text-xs text-[var(--red)]'>{errorMsg}</p>
-            <Button2 text={"Masuk"} onClick={(e) => login(e)}/>
+            <DarkGreenButton text={"Masuk"} onClick={(e) => login(e)} style={"text-red-200"}/>
         </div>
     </div>
             
