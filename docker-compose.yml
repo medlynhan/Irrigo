@@ -1,35 +1,46 @@
-
 services:
   client:
     build:
-      context: ./client          # Path ke folder client (Next.js)
+      context: ./client
     ports:
-      - "3000:3000"              # Pemetaan port 3000
+      - "3000:3000"
     env_file:
-      - ./client/.env.local  
+      - ./client/.env.local
+    environment:
+    - CHOKIDAR_USEPOLLING=true
+    - WATCHPACK_POLLING=true
+    - WATCHPACK_POLL_INTERVAL=1000
+    
+    command: npm run dev      
     depends_on:
-      - server       
+      - server
     networks:
-      - grow_network             # Menggunakan jaringan yang sama dengan server dan model
-  
+      - grow_network
+    volumes:
+      - ./client:/app
+      - /app/node_modules
+      - /app/.next 
+
   server:
     build:
-      context: ./server          # Path ke folder server (Node.js)
+      context: ./server
     ports:
-      - "8000:8000"              # Pemetaan port 8000
+      - "8000:8000"
+    command: node index.js      # normal start
     depends_on:
-      - model                    # Pastikan server dijalankan setelah model (Flask)
+      - model
     networks:
-      - grow_network             # Menggunakan jaringan yang sama dengan client dan model
-  
+      - grow_network
+
   model:
     build:
-      context: ./model           # Path ke folder model (Flask API)
+      context: ./model
     ports:
-      - "5000:5000"              # Pemetaan port 5000
+      - "5000:5000"
+    command: flask run --host=0.0.0.0 --port=5000
     networks:
-      - grow_network             # Menggunakan jaringan yang sama dengan client dan server
+      - grow_network
 
 networks:
-  grow_network:                  # Mendefinisikan jaringan grow_network
+  grow_network:
     driver: bridge

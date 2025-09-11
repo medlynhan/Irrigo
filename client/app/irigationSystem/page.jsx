@@ -239,13 +239,13 @@ export default function Page() {
 
 
       
-      <div className='  w-full flex flex-col gap-10 lg:flex-row w-full lg:h-[75vh] border'>
+      <div className='  w-full flex flex-col gap-10 lg:flex-row w-full lg:h-[75vh]  mt-15 md:mt-0  '>
 
-        <div className='grid grid-cols gap-6 grid-rows-4  place-content-between'>
-            <div className='flex flex-col gap-2  row-span-1'>
+        <div className='grid grid-cols gap-2 lg:gap-6 grid-rows-4  place-content-between '>
+            <div className='flex flex-col gap-2 justify-center   row-span-1 max-h-[10em]'>
                 <div className='flex flex-row justify-start items-center gap-2 h-full'>
-                  <GiWateringCan className='text-3xl md:text-5xl text-justify  text-[var(--dark-green)]'/>
-                  <h1 className='text-2xl md:text-3xl font-semibold  text-juctify text-[var(--dark-green)]'>Sistem Irigasi</h1>
+                  <GiWateringCan className='text-3xl md:text-5xl text-justify  text-[var(--black)]'/>
+                  <h1 className='text-2xl md:text-3xl font-semibold  text-juctify text-[var(--black)]'>Sistem Irigasi</h1>
                 </div>
                 <p className='text-sm md:text-base'>Berikut prediksi kebutuhan air tanaman kamu 5 hari kedepan !</p>
             </div>
@@ -253,17 +253,17 @@ export default function Page() {
             <div className=' grid-cols grid grid-rows-7 w-full row-span-3 place-content-between h-full gap-6 xl:w-[40em] '>
                 <div className='w-full flex flex-col gap-2 row-span-1'>
                     <div className='min-w-[20em] xl:w-[40em] '>
-                      <div className='flex flex-row border-2 border-[var(--light-green-2)] p-2 rounded-xl justify-between cursor-pointer w-[50%] gap-2 items-center' onClick={chooseField}>
+                      <div className='bg-gray-50 border border-gray-300 text-gray-900 placeholder-gray-400 flex flex-row  p-2 rounded-lg justify-between cursor-pointer w-[50%] gap-2 items-center' onClick={chooseField}>
                         <p className='w-full'>{value ? value : "Pilih Ladang"}</p>
                         <IoIosArrowDown />
                       </div>
                     </div>
                     <div className='w-full '>
                       {isOpen && (
-                      <div className='absolute bg-[var(--light-yellow)] border-2 border-[var(--medium-green)] rounded-xl cursor-pointer w-[55%] gap-6 md:max-w-[30%] shadow'>
+                      <div className='absolute bg-[var(--light-yellow)] border  border-gray-300 rounded-lg cursor-pointer w-[55%] gap-6 md:max-w-[30%] shadow'>
                         {fields.length > 0 ? (
                           fields.map((field, index) => (
-                            <div key={index} className={`hover:bg-[var(--light-green-1)] p-2 cursor-pointer ${index === 0 ? 'rounded-t-xl' : index === fields.length - 1 ? 'rounded-b-xl' : ''}`} onClick={() => setChoosenField(field)} >
+                            <div key={index} className={`hover:bg-gray-50 p-2 cursor-pointer ${index === 0 ? 'rounded-t-lg' : index === fields.length - 1 ? 'rounded-b-lg' : ''}`} onClick={() => setChoosenField(field)} >
                               <p>{field.field_name}</p>
                             </div>
                           ))
@@ -277,7 +277,7 @@ export default function Page() {
 
                 
                 {!loading && (
-                <div className='box bg-[var(--light-green-1)] gap-4 px-4 flex-col text-[var(--black)] h-full  row-span-3 border-pink-200 border-4'>
+                <div className='box bg-[var(--light-green-1)] gap-4 px-4 flex-col text-[var(--black)] h-full  row-span-3 '>
                   <div className='flex flex-row justify-start w-full items-center gap-2'>
                       <FaBell className='text-base md:text-lg text-[var(--dark-green)]' />
                       <p className='text-base md:text-lg font-semibold text-[var(--dark-green)]'>Notifikasi</p>
@@ -292,13 +292,13 @@ export default function Page() {
                 <div className='box grid grid-cols-5 bg-transparent p-0 gap-4 text-[var(--dark-green)] h-full  row-span-4 w-full '>
                 
                   <div className='col-span-2 h-full w-full  overflow-hidden '>
-                      <Image src={'/fieldPhoto.png'} width={200} height={200} className='object-cover object-fit w-full h-full rounded-xl'></Image>
+                      <Image src={'/fieldPhoto.png'} width={200} height={200} className='object-cover object-fit w-full h-full rounded-lg'></Image>
                   </div>
                   
-                  <div className='border-2 w-full h-full border-[var(--light-green-2)]  rounded-xl col-span-3 text-[var(--black)]'>         
+                  <div className=' border border-gray-300 text-gray-900 placeholder-gray-400 w-full h-full border-[var(--light-green-2)]  rounded-lg col-span-3 text-[var(--black)]'>         
                     <div className='w-full p-1'>
                         <p className='md:text-sm  font-semibold'>Jenis tanaman :</p>
-                        <p className='md:text-sm  '>{cropTypeTranslate ? cropTypeTranslate : ""}</p>
+                        <p className='md:text-sm  '>{cropTypeTranslate ? cropTypeTranslate : "Padi"}</p>
                     </div>
                     <div className='w-full p-1'>
                         <p className='md:text-sm  font-semibold'>Status tanah :</p>
@@ -319,7 +319,7 @@ export default function Page() {
         </div>     
 
           {!loading && (
-          <div className='  flex flex-col gap-2 w-full p-4 lg:p-10 rounded-xl bg-[var(--medium-green)]  h-full overflow-y-auto border-pink-200 border-4 scrollbar-hide'>
+          <div className='  flex flex-col gap-2 w-full p-4 lg:p-10 rounded-lg bg-[var(--dark-green)]  h-full overflow-y-auto scrollbar-hide'>
             
             <h1 className='pb-2 text-base ms:text-lg text-[var(--white)] font-semibold'>Hasil prediksi kebutuhan air</h1>
           
@@ -360,11 +360,6 @@ export default function Page() {
 
 
         </div>
-        {!loading && (
-        <div className='  '>
-              <DarkGreenButton text={"Kembali"} onClick={handleGoBack} />
-        </div>
-        )}
 
       </div>
   );

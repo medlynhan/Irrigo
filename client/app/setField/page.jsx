@@ -3,12 +3,12 @@ import React from 'react'
 import { IoIosClose } from "react-icons/io";
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import Button2 from '../components/Button2';
-import Button1 from '../components/Button1';
 import { supabase } from '../lib/supabase';
 import Cookies from 'js-cookie';
 import { IoIosArrowDown } from "react-icons/io";
 import MapboxMap from '../components/MapboxMap';
+import DarkGreenButton from '../components/DarkGreenButton';
+import LightGreenButton from '../components/LightGreenButton';
 
 export default function page() {
     const router = useRouter();
@@ -115,7 +115,7 @@ export default function page() {
     return (
     <div className="container md:px-25 md:py-15 ">
       <div className="flex flex-col gap-6 w-full ">
-        <h1 className="text-xl md:text-3xl font-semibold w-full text-[var(--dark-green)]">Atur Ladangmu</h1>
+        <h1 className="text-xl md:text-3xl font-semibold w-full ">Atur Ladangmu</h1>
           <div className='grid grid-cols-1 xl:grid-cols-2 gap-8'>
             {/* Kiri */}
             <div className="flex flex-col gap-6 w-full ">
@@ -126,22 +126,22 @@ export default function page() {
                     type="text"
                     value={nama}
                     onChange={(e) => setNama(e.target.value)}
-                    className="bg-[var(--light-green-1)] p-2 w-full rounded-xl"
+                    className="bg-gray-50 border border-gray-300 text-gray-900  bg-[var(--light-green-1)] p-2 w-full rounded-lg"
                     required
                 />
                 </div>
 
                 <div className="w-full xl:max-w-[70%]">
                     <label htmlFor="alamat" className="block text-left mb-1">Jenis Tanah</label>
-                    <div className='relative  bg-[var(--light-green-1)] p-2 w-full rounded-xl flex flex-col gap-4 cursor-pointer'> 
-                        <div className='flex flex-row w-full justify-between items-center  rounded-xl' onClick={() => setChooseFieldTypeDdl(true)}>
+                    <div className='bg-gray-50 border border-gray-300 text-gray-900  relative  bg-[var(--light-green-1)] p-2 w-full rounded-lg flex flex-col gap-4 cursor-pointer'> 
+                        <div className=' flex flex-row w-full justify-between items-center  rounded-lg' onClick={() => setChooseFieldTypeDdl(true)}>
                             <p>{selectedFieldType ? selectedFieldType : ""}</p>
                             <IoIosArrowDown />
                         </div>
                         
                         {ChooseFieldTypeDdl && (
-                            <div className='absolute z-20 left-0 top-0 bg-[var(--light-yellow)] border-2 border-[var(--medium-green)] rounded-xl cursor-pointer w-full gap-6 shadow'>
-                                <div className="hover:bg-[var(--light-green-1)] p-2 cursor-pointer   rounded-t-xl" onClick={() => selectFieldType("Aluvial")} >
+                            <div className='absolute z-20 left-0 top-0 bg-[var(--light-yellow)] border border-gray-300  rounded-lg cursor-pointer w-full gap-6 shadow'>
+                                <div className="hover:bg-[var(--light-green-1)] p-2 cursor-pointer   rounded-t-lg" onClick={() => selectFieldType("Aluvial")} >
                                     <p>Aluvial</p>
                                 </div>
                                 <div className="hover:bg-[var(--light-green-1)] p-2 cursor-pointer  " onClick={() => selectFieldType("Latosol")} >
@@ -150,7 +150,7 @@ export default function page() {
                                 <div className="hover:bg-[var(--light-green-1)] p-2 cursor-pointer  " onClick={() => selectFieldType("Liat")} >
                                     <p>Liat</p>
                                 </div>
-                                <div className="hover:bg-[var(--light-green-1)] p-2 cursor-pointer   rounded-b-xl" onClick={() => selectFieldType("Pasir")} >
+                                <div className="hover:bg-[var(--light-green-1)] p-2 cursor-pointer   rounded-b-lg" onClick={() => selectFieldType("Pasir")} >
                                     <p>Pasir</p>
                                 </div>
                             </div>
@@ -162,15 +162,15 @@ export default function page() {
 
                 <div className="w-full xl:max-w-[70%]">
                     <label htmlFor="alamat" className="block text-left mb-1">Jenis Tanaman</label>
-                    <div className='relative bg-[var(--light-green-1)] p-2 w-full rounded-xl flex flex-col gap-4 cursor-pointer'> 
-                        <div className='flex flex-row w-full justify-between items-center  rounded-xl' onClick={() => setChoosePlantDdl(true)}>
+                    <div className='bg-gray-50 border border-gray-300 text-gray-900 relative bg-[var(--light-green-1)] p-2 w-full rounded-lg flex flex-col gap-4 cursor-pointer'> 
+                        <div className='flex flex-row w-full justify-between items-center  rounded-lg' onClick={() => setChoosePlantDdl(true)}>
                             <p>{selectedPlant ? selectedPlant : ""}</p>
                             <IoIosArrowDown />
                         </div>
                         
                         {ChoosePlantDdl && (
-                            <div className='absolute  z-20 left-0 top-0 bg-[var(--light-yellow)] border-2 border-[var(--medium-green)] rounded-xl cursor-pointer w-full gap-6 shadow'>
-                                <div className="hover:bg-[var(--light-green-1)] p-2 cursor-pointer   rounded-t-xl" onClick={() => selectPlant("Padi")} >
+                            <div className='absolute  z-20 left-0 top-0 bg-[var(--light-yellow)] border border-gray-300 rounded-lg cursor-pointer w-full gap-6 shadow'>
+                                <div className="hover:bg-[var(--light-green-1)] p-2 cursor-pointer   rounded-t-lg" onClick={() => selectPlant("Padi")} >
                                     <p>Padi</p>
                                 </div>
                                 <div className="hover:bg-[var(--light-green-1)] p-2 cursor-pointer  " onClick={() => selectPlant("Jagung")} >
@@ -179,7 +179,7 @@ export default function page() {
                                 <div className="hover:bg-[var(--light-green-1)] p-2 cursor-pointer  " onClick={() => selectPlant("Tomat")} >
                                     <p>Tomat</p>
                                 </div>
-                                <div className="hover:bg-[var(--light-green-1)] p-2 cursor-pointer   rounded-b-xl" onClick={() => selectPlant("Kubis")} >
+                                <div className="hover:bg-[var(--light-green-1)] p-2 cursor-pointer   rounded-b-lg" onClick={() => selectPlant("Kubis")} >
                                     <p>Kubis</p>
                                 </div>
                             </div>
@@ -196,7 +196,7 @@ export default function page() {
                     type="text"
                     value={alamat}
                     onChange={(e) => setAlamat(e.target.value)}
-                    className="bg-[var(--light-green-1)] p-2 w-full rounded-xl"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 bg-[var(--light-green-1)] p-2 w-full rounded-lg"
                     required
                 />
                 </div>
@@ -213,7 +213,7 @@ export default function page() {
                             type="text"
                             value={latitude1}
                             onChange={(e) => setLatitude1(e.target.value)}
-                            className="border-2 border-[var(--light-green-2)] p-2 w-full rounded-xl"
+                            className="opacity-50 border border-gray-300 text-gray-900 placeholder-gray-400 text-sm rounded-lg block w-full p-2.5"
                             required
                         />
                     </div>
@@ -224,7 +224,7 @@ export default function page() {
                             type="text"
                             value={latitude2}
                             onChange={(e) => setLatitude2(e.target.value)}
-                            className="border-2 border-[var(--light-green-2)] p-2 w-full rounded-xl"
+                            className="opacity-50 border border-gray-300 text-gray-900 placeholder-gray-400 text-sm rounded-lg block w-full p-2.5"
                             required
                         />
                     </div>
@@ -235,7 +235,7 @@ export default function page() {
                             type="text"
                             value={latitude3}
                             onChange={(e) => setLatitude3(e.target.value)}
-                            className="border-2 border-[var(--light-green-2)] p-2 w-full rounded-xl"
+                            className="opacity-50 border border-gray-300 text-gray-900 placeholder-gray-400 text-sm rounded-lg block w-full p-2.5"
                             required
                         />
                     </div>
@@ -246,7 +246,7 @@ export default function page() {
                             type="text"
                             value={latitude4}
                             onChange={(e) => setLatitude4(e.target.value)}
-                            className="border-2 border-[var(--light-green-2)] p-2 w-full rounded-xl"
+                            className="opacity-50 border border-gray-300 text-gray-900 placeholder-gray-400 text-sm rounded-lg block w-full p-2.5"
                             required
                         />
                     </div>
@@ -259,7 +259,7 @@ export default function page() {
                             type="text"
                             value={longtitude1}
                             onChange={(e) => setLongtitude1(e.target.value)}
-                            className="border-2 border-[var(--light-green-2)] p-2 w-full rounded-xl"
+                            className="bg-gray-50 border border-gray-300 text-gray-900 placeholder-gray-400 text-sm rounded-lg block w-full p-2.5"
                             required
                         />
                     </div>
@@ -270,7 +270,7 @@ export default function page() {
                             type="text"
                             value={longtitude2}
                             onChange={(e) => setLongtitude2(e.target.value)}
-                            className="border-2 border-[var(--light-green-2)] p-2 w-full rounded-xl"
+                            className="bg-gray-50 border border-gray-300 text-gray-900 placeholder-gray-400 text-sm rounded-lg block w-full p-2.5"
                             required
                         />
                     </div>
@@ -281,7 +281,7 @@ export default function page() {
                             type="text"
                             value={longtitude3}
                             onChange={(e) => setLongtitude3(e.target.value)}
-                            className="border-2 border-[var(--light-green-2)] p-2 w-full rounded-xl"
+                            className="bg-gray-50 border border-gray-300 text-gray-900 placeholder-gray-400 text-sm rounded-lg block w-full p-2.5"
                             required
                         />
                     </div>
@@ -292,12 +292,12 @@ export default function page() {
                             type="text"
                             value={longtitude4}
                             onChange={(e) => setLongtitude4(e.target.value)}
-                            className="border-2 border-[var(--light-green-2)] p-2 w-full rounded-xl"
+                            className="bg-gray-50 border border-gray-300 text-gray-900 placeholder-gray-400 text-sm rounded-lg block w-full p-2.5"
                             required
                         />
                     </div>
                 </div>
-                <div className='relative rounded-xl grid grid-cols row-span-1 col-span-2 md:col-span-2 gap-6 w-full  items-center justify-center  h-full'>
+                <div className='relative rounded-lg grid grid-cols row-span-1 col-span-2 md:col-span-2 gap-6 w-full  items-center justify-center  h-full'>
                     <MapboxMap lat1={latitude1} lat2={latitude2} lat3={latitude3} lat4={latitude4} long1={longtitude1} long2={longtitude2} long3={longtitude3} long4={longtitude4}/>
                 </div>
  
@@ -308,8 +308,8 @@ export default function page() {
               <p className="text-[var(--red)] text-sm">{errorMsg}</p>
             )}
             <div className="flex justify-center gap-6">
-                <Button1 text={"Batal"} onClick={Batal}/>
-                <Button2 text={"Simpan"} onClick={Simpan}/>
+                <LightGreenButton text={"Batal"} onClick={Batal} />
+                <DarkGreenButton text={"Simpan"} onClick={Simpan}/>
             </div>
         </div>
         

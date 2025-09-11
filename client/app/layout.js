@@ -33,7 +33,7 @@ export default function RootLayout({ children }) {
 
   return (
         <html lang="en">
-            <body className="md:text-sm">
+            <body className="relative  md:text-sm font-medium" >
                 
                     {children}
                 
