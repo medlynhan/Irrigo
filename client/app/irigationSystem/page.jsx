@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 import DarkGreenButton from '../components/DarkGreenButton';
 import ScheduleBox from '../components/ScheduleBox';
 import Image from 'next/image';
+import dynamic from 'next/dynamic';
 import { IoIosArrowDown } from "react-icons/io";
 import { FaBell } from "react-icons/fa6";
 import Navbar from '../components/Navbar';
@@ -11,11 +12,17 @@ import { supabase } from '../lib/supabase';
 import Cookies from 'js-cookie';
 import { GiWateringCan } from "react-icons/gi";
 import axios from 'axios';
-import { PiLeafFill } from "react-icons/pi";
-import MapboxMap from '../components/MapboxMap';
+import { GoPlus } from "react-icons/go";
 
 export default function Page() {
+  const MapboxMap = dynamic(() => import('../components/MapboxMap'), { ssr: false });
   const router = useRouter();
+
+
+  const goToSetField = () => {
+        router.push("/setField");
+  }
+
   const [email, setEmail] = useState(null); //ambil dr session
 
   const [isOpen, setIsOpen] = useState(false); //open modal
@@ -36,7 +43,7 @@ export default function Page() {
   const [waterRequirementFor5Days, setWaterRequirementFor5Days] = useState([]);
   const [notification, setNotification] = useState("");
 
-  const[loading,setLoading] = useState("true");
+  const [loading, setLoading] = useState(true);
 
 
 
@@ -86,7 +93,7 @@ export default function Page() {
   };
 
   const chooseField = () => {
-    setIsOpen(!isOpen); // Toggle dropdown visibility
+    setIsOpen(prev => !prev); // Toggle dropdown visibility
     console.log("Dropdown is now", isOpen ? "opened" : "closed"); // Debugging dropdown visibility
   };
 
@@ -153,6 +160,32 @@ export default function Page() {
     }
   };
 
+  
+    const [coordinates, setCoordinates] = useState({ latitudes: [], longitudes: [] });
+
+    const extractCoordinates = (fieldData) => {
+    // Mengambil data lat dan lon dari field_data
+    if (fieldData && fieldData.lat && fieldData.lon) {
+      const latitudes = fieldData.lat;
+      const longitudes = fieldData.lon;
+
+      // Menampilkan data lat dan lon dalam bentuk array
+      console.log('Latitudes:', latitudes);
+      console.log('Longitudes:', longitudes);
+
+      return {
+        latitudes,
+        longitudes
+      };
+    }
+    return {
+      latitudes: [],
+      longitudes: []
+    };
+  };
+
+
+
   const fetchDataFromNode = async () => {
     try {
       const response = await axios.get('http://localhost:8000/getProcessedData');
@@ -210,6 +243,12 @@ export default function Page() {
     }
   }, [selectedField]);
 
+  useEffect(() => {
+    if (fields.length > 0) {
+      const { latitudes, longitudes } = extractCoordinates(fields[0]);
+      setCoordinates({ latitudes, longitudes });  // Update koordinat ke state
+    }
+  }, [fields]);
 
   const getCropType = (cropType) => {
     switch (cropType) {
@@ -228,23 +267,22 @@ export default function Page() {
 
 
   return (
-    <div className='container md:p-25 '>
+    <div className='container md:p-15 '>
       <Navbar />
       {loading && (
       <div className='absolute z-10 top-0 left-0 landscape:top-[10em] w-full text-[var(--dark-green)]  flex flex-col gap-4 justify-center items-center h-full'>
-        <PiLeafFill className='text-2xl lg:text-3xl animate-rotateIn '/>
+        <GiWateringCan className='text-2xl lg:text-3xl animate-rotateIn '/>
         <p className=''>Memuat ...</p>
       </div>
       )}
 
 
       
-      <div className='  w-full flex flex-col gap-10 lg:flex-row w-full lg:h-[75vh]  mt-15 md:mt-0  '>
+      <div className='  w-full flex flex-col gap-10 lg:flex-row w-full lg:h-[75vh]    '>
 
-        <div className='grid grid-cols gap-2 lg:gap-6 grid-rows-4  place-content-between '>
-            <div className='flex flex-col gap-2 justify-center   row-span-1 max-h-[10em]'>
-                <div className='flex flex-row justify-start items-center gap-2 h-full'>
-                  <GiWateringCan className='text-3xl md:text-5xl text-justify  text-[var(--black)]'/>
+        <div className='grid grid-cols gap-2 lg:gap-6 grid-rows-4  place-content-between   w-full'>
+            <div className='flex flex-col gap-2 justify-center  row-span-1 max-h-[10em] w-full '>
+                <div className='flex justify-start items-center gap-2 h-full'>
                   <h1 className='text-2xl md:text-3xl font-semibold  text-juctify text-[var(--black)]'>Sistem Irigasi</h1>
                 </div>
                 <p className='text-sm md:text-base'>Berikut prediksi kebutuhan air tanaman kamu 5 hari kedepan !</p>
@@ -258,32 +296,39 @@ export default function Page() {
                         <IoIosArrowDown />
                       </div>
                     </div>
-                    <div className='w-full '>
+                    <div className='w-full z-50 '>
                       {isOpen && (
-                      <div className='absolute bg-[var(--light-yellow)] border  border-gray-300 rounded-lg cursor-pointer w-[55%] gap-6 md:max-w-[30%] shadow'>
-                        {fields.length > 0 ? (
-                          fields.map((field, index) => (
-                            <div key={index} className={`hover:bg-gray-50 p-2 cursor-pointer ${index === 0 ? 'rounded-t-lg' : index === fields.length - 1 ? 'rounded-b-lg' : ''}`} onClick={() => setChoosenField(field)} >
+                        <div className="absolute bg-[var(--light-yellow)] border border-gray-300 rounded-lg cursor-pointer w-[55%] gap-6 md:max-w-[30%] shadow">
+                          {fields.length > 0 && fields.map((field, index) => (
+                            <div
+                              key={index}
+                              className={`hover:bg-gray-50 p-2 cursor-pointer ${index === 0 ? 'rounded-t-lg' : " "}`}
+                              onClick={() => setChoosenField(field)}
+                            >
                               <p>{field.field_name}</p>
                             </div>
-                          ))
-                        ) : (
-                          <p className='p-2'>Belum ada ladang</p>
-                        )}
-                      </div>
-                      )}
+                          ))}
+
+                          <div
+                            className="hover:bg-gray-50 p-2 cursor-pointer flex gap-1 justify-start items-center rounded-b-lg"
+                            onClick={goToSetField}
+                          >
+                            <GoPlus className="text-sm" />
+                            <p className="p-2">Tambah Ladang</p>
+                          </div>
+                        </div>)}
                     </div>
                 </div>
 
                 
                 {!loading && (
-                <div className='box bg-[var(--light-green-1)] gap-4 px-4 flex-col text-[var(--black)] h-full  row-span-3 '>
+                <div className='box  bg-[var(--light-green-1)] gap-4 px-4 flex-col text-[var(--black)] h-full  row-span-3 '>
                   <div className='flex flex-row justify-start w-full items-center gap-2'>
-                      <FaBell className='text-base md:text-lg text-[var(--dark-green)]' />
-                      <p className='text-base md:text-lg font-semibold text-[var(--dark-green)]'>Notifikasi</p>
+                      <FaBell className='text-base md:text-lg text-[var(--black)]' />
+                      <p className='text-base md:text-lg font-semibold text-[var(--black)]'>Notifikasi</p>
                   </div>
                     <ul className='list-disc w-[90%] space-y-2'>
-                      <li className='w-full text-[var(--dark-green)]'> {notification ? notification : "Siram tanaman anda"}</li>
+                      <li className='w-full text-[var(--black)]'> {notification ? notification : "Siram tanaman anda"}</li>
                     </ul>
                 </div>
                 )}
@@ -291,11 +336,11 @@ export default function Page() {
                 {!loading && (
                 <div className='box grid grid-cols-5 bg-transparent p-0 gap-4 text-[var(--dark-green)] h-full  row-span-4 w-full '>
                 
-                  <div className='col-span-2 h-full w-full  overflow-hidden '>
-                      <Image src={'/fieldPhoto.png'} width={200} height={200} className='object-cover object-fit w-full h-full rounded-lg'></Image>
-                  </div>
+                  {coordinates && (<div className='col-span-2 h-full w-full  overflow-hidden max-h-200'>
+                      <MapboxMap lat1={coordinates.longitudes[0]} lat2={coordinates.longitudes[1]} lat3={coordinates.longitudes[2]} lat4={coordinates.longitudes[3]} long1={coordinates.latitudes[0]} long2={coordinates.latitudes[1]} long3={coordinates.latitudes[2]} long4={coordinates.latitudes[3]}/>
+                  </div>)}
                   
-                  <div className=' border border-gray-300 text-gray-900 placeholder-gray-400 w-full h-full border-[var(--light-green-2)]  rounded-lg col-span-3 text-[var(--black)]'>         
+                  <div className=' border border-gray-300 text-gray-900 placeholder-gray-400 max-h-200 w-full h-full border-[var(--light-green-2)]  rounded-lg col-span-3 text-[var(--black)]'>         
                     <div className='w-full p-1'>
                         <p className='md:text-sm  font-semibold'>Jenis tanaman :</p>
                         <p className='md:text-sm  '>{cropTypeTranslate ? cropTypeTranslate : "Padi"}</p>
@@ -319,9 +364,9 @@ export default function Page() {
         </div>     
 
           {!loading && (
-          <div className='  flex flex-col gap-2 w-full p-4 lg:p-10 rounded-lg bg-[var(--dark-green)]  h-full overflow-y-auto scrollbar-hide'>
+          <div className='  flex flex-col gap-2 w-full p-4 lg:p-10 rounded-lg bg-gray-50  h-full overflow-y-auto scrollbar-hide'>
             
-            <h1 className='pb-2 text-base ms:text-lg text-[var(--white)] font-semibold'>Hasil prediksi kebutuhan air</h1>
+            <h1 className='pb-2 text-base ms:text-lg font-semibold'>Hasil prediksi kebutuhan air</h1>
           
             <div className='flex flex-col gap-2 '>
               {waterRequirementFor5Days && temperatureFor5Days && weatherFor5Days &&
@@ -332,25 +377,24 @@ export default function Page() {
 
                   return (
                     <ScheduleBox 
-                      key={index} 
-                      weather={weather.conditions[0]} 
-                      temperatureMin={temperature.min} 
-                      temperatureMax={temperature.max} 
-                      date={water.date} 
-                      waterReq={water.prediction[0]} // Mengirimkan prediksi air
+                      weather={Array.isArray(weather?.conditions) ? weather.conditions[0] : undefined}
+                      temperatureMin={temperature?.min}
+                      temperatureMax={temperature?.max}
+                      date={water?.date}
+                      waterReq={Array.isArray(water?.prediction) ? water.prediction[0] : undefined}
                     />
                   );
                 })
               }
               
-                    {/* <ScheduleBox 
+                    <ScheduleBox 
                       key={1} 
                       weather={"SUNNY"} 
                       temperatureMin={"10"} 
                       temperatureMax={"20"} 
                       date={"2020-04-07"} 
                       waterReq={"3.32"} 
-                    /> */}
+                    />
 
                     
             </div>

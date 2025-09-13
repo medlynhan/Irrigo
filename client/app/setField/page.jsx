@@ -13,6 +13,17 @@ import LightGreenButton from '../components/LightGreenButton';
 export default function page() {
     const router = useRouter();
     
+
+    const goBack = () => {
+        // Kalau ada history, balik ke halaman sebelumnya
+        if (window.history.length > 1) {
+        router.back()
+        } else {
+        // fallback kalau user masuk langsung ke halaman ini (misalnya bookmark)
+        router.push('/')
+        }
+    }
+
     //ambil data dr session
     const [email, setEmail] = useState(null); 
 
@@ -114,6 +125,7 @@ export default function page() {
   
     return (
     <div className="container md:px-25 md:py-15 ">
+    <IoIosClose className='text-4xl md:text-5xl cursor-pointer absolute top-3 right-3 fixed'  onClick={goBack}/>
       <div className="flex flex-col gap-6 w-full ">
         <h1 className="text-xl md:text-3xl font-semibold w-full ">Atur Ladangmu</h1>
           <div className='grid grid-cols-1 xl:grid-cols-2 gap-8'>
@@ -213,7 +225,7 @@ export default function page() {
                             type="text"
                             value={latitude1}
                             onChange={(e) => setLatitude1(e.target.value)}
-                            className="opacity-50 border border-gray-300 text-gray-900 placeholder-gray-400 text-sm rounded-lg block w-full p-2.5"
+                            className="bg-gray-50 border border-gray-300 text-gray-900 placeholder-gray-400 text-sm rounded-lg block w-full p-2.5"
                             required
                         />
                     </div>
@@ -224,7 +236,7 @@ export default function page() {
                             type="text"
                             value={latitude2}
                             onChange={(e) => setLatitude2(e.target.value)}
-                            className="opacity-50 border border-gray-300 text-gray-900 placeholder-gray-400 text-sm rounded-lg block w-full p-2.5"
+                            className="bg-gray-50 border border-gray-300 text-gray-900 placeholder-gray-400 text-sm rounded-lg block w-full p-2.5"
                             required
                         />
                     </div>
@@ -235,7 +247,7 @@ export default function page() {
                             type="text"
                             value={latitude3}
                             onChange={(e) => setLatitude3(e.target.value)}
-                            className="opacity-50 border border-gray-300 text-gray-900 placeholder-gray-400 text-sm rounded-lg block w-full p-2.5"
+                            className="bg-gray-50 border border-gray-300 text-gray-900 placeholder-gray-400 text-sm rounded-lg block w-full p-2.5"
                             required
                         />
                     </div>
@@ -246,7 +258,7 @@ export default function page() {
                             type="text"
                             value={latitude4}
                             onChange={(e) => setLatitude4(e.target.value)}
-                            className="opacity-50 border border-gray-300 text-gray-900 placeholder-gray-400 text-sm rounded-lg block w-full p-2.5"
+                            className="bg-gray-50 border border-gray-300 text-gray-900 placeholder-gray-400 text-sm rounded-lg block w-full p-2.5"
                             required
                         />
                     </div>

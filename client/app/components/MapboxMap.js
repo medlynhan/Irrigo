@@ -69,6 +69,9 @@ useEffect(() => {
   }, [coordinates])
 
   return (
-      <div ref={mapContainerRef} className='absolute md:w-[20em] md:h-[20em] h-[15em] w-[15em] rounded-xl '></div>
+      <div className='w-full rounded-lg '>
+        <div ref={mapContainerRef} className='rounded-lg absolute w-[20em] h-[20em] object-cover'></div>
+      </div>
+      
   )
 }

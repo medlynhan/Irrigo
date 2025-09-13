@@ -8,14 +8,14 @@
 :root {
   --white: #FFFFFF;  
   --light-yellow: #FFFFFF;      /* Warna putih cerah */
-  --dark-yellow: #fdfdb8; /* Warna kuning lebih gelap untuk aksen */
+  --dark-yellow: #dbaa14; /* Warna kuning lebih gelap untuk aksen */
   --light-green-1: #bae9d9; /* Warna hijau terang untuk tombol atau elemen interaktif */
   --light-green-2: #84e6c7; /* Warna hijau yang lebih gelap untuk background sekunder */
   --dark-green: #018670;   /* Warna hijau gelap untuk teks utama */
   --gray: #D9D9D9;         /* Warna abu-abu untuk border atau background netral */
   --black: #002722;        /* Warna hitam untuk teks gelap */
   --red: #f15a5a;          /* Warna merah untuk error atau warning */
-  --baby-blue : #c8f6f3; /* Warna biru untuk background utama */
+  --baby-blue : #70c4bf; /* Warna biru untuk background utama */
 }
 
 
@@ -82,7 +82,7 @@
 
   .button2{
     @apply p-2.5;
-    @apply rounded-xl;
+    @apply rounded-lg;
     @apply cursor-pointer;
     @apply bg-green-400  text-white;
   }
@@ -91,14 +91,9 @@
   .box{
     @apply flex flex-row justify-start items-center;
     @apply bg-green-400 text-white w-full;
-    @apply p-2 rounded-xl gap-2;
+    @apply p-2 rounded-lg gap-2;
   }
 
-  .navbar{
-    @apply fixed absolute top-0 left-0 w-screen bg-green-500 flex flex-row gap-10 justify-between items-center py-5 px-10;
-    @apply text-white text-2xl;
-    @apply shadow-sm shadow-green-400;
-  }
 
   .shadow {
     box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2); /* Bayangan dengan offset horizontal, vertical, dan blur */
@@ -142,7 +137,7 @@
 
 @layer utilities {
   ::selection {
-    background-color: var(--light-green-1); 
+    background-color: var(--light-green-2); 
     
   }
 
